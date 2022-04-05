@@ -1,0 +1,57 @@
+use_synth :mod_fm
+use_bpm 81
+#8
+stomp_clap = "C:/Users/chloe_holton/Documents/Audacity/stomp.wav"
+#4
+sample_one = "C:/Users/chloe_holton/Documents/Audacity/sample_one.wav"
+#4
+sample_two = "C:/Users/chloe_holton/Documents/Audacity/sample_two.wav"
+index = 0
+measure = [":d4", ":e4", ":e4", ":d4", ":e4", ":e4", ":d4",":e4", ":e4", ":d4", ":e4",
+           ":e4", ":d4",":e4", ":e4", ":d4", ":e4", ":d4", ":e4", ":a4", ":g4", ":g4", ":c4",
+           ":d4", ":e4", ":e4", ":d4", ":e4", ":d4", ":e4", ":e4", ":e4", ":d4", ":d4",
+           ":d4", ":d4", ":b3", ":a3", ":g3", ":e3", ":e3", ":e3"]
+rest = [0.5, 0.5, 0.5, 0.5, 1, 0.5, 0.5, 1, 1, 0.5, 0.5, 0.5, 0.5, 1, 0.5,
+        0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 1, 0.5, 1, 0.5, 1.5, 0.5, 1, 1, 2,
+        0.5, 0.5, 1, 2, 3, 0.5, 0.5, 0.5, 0.5, 0.5, 1.5]
+x = 10
+
+8.times do
+  sample stomp_clap, amp: x
+  sleep 2
+  x = x + 5
+end
+
+live_loop :notes1 do
+  1.times do
+    play measure[index]
+    sleep rest[index]
+    index = index + 1
+  end
+  index = 0
+end
+
+sleep 20
+
+define :notes2 do |n,s|
+  play n
+  sleep s
+end
+
+#m10
+notes2 :g4, 2
+notes2 :f4, 2
+#m11
+notes2 :e4, 2
+notes2 :d4, 2
+#m12
+notes2 :e4, 1
+notes2 :e4, 3
+sleep 4
+
+sample sample_one
+sleep 3
+sample sample_two
+sleep 3
+sample sample_two
+sleep 3

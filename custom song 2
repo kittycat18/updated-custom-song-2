@@ -23,7 +23,7 @@ x = 10
 end
 
 live_loop :notes1 do
-  1.times do
+  with_fx :octaver do
     play measure[index]
     sleep rest[index]
     index = index + 1
